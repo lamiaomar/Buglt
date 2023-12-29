@@ -107,4 +107,13 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.5.31")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1")
 
+    // Dagger - Hilt
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    annotationProcessor("com.google.dagger:hilt-android-compiler:2.38.1")
+    annotationProcessor("androidx.hilt:hilt-compiler:1.0.0")
+    annotationProcessor("androidx.hilt:hilt-navigation-compose:1.0.0-alpha03")
+
+    // Horizontal Pager and Indicators - Accompanist
+    implementation("com.google.accompanist:accompanist-pager:0.21.2-beta")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.21.2-beta")
 }
