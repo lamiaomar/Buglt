@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Buglt</string>
+    <string name="create_ticket_screen_title">Create Ticket</string>
+    <string name="open_ticket_form_title">Open a Ticket</string>
+
+    <string name="button_radio_android">Android</string>
+    <string name="button_radio_ios">iOS</string>
+    <string name="button_radio_pwa">PWA</string>
+    <string name="button_radio_platform_title">Platform</string>
+
+    <string name="create_ticket_button">Create</string>
+    <string name="description_edit_text_label">Description</string>
+    <string name="summery_edit_text_label">Summery</string>
+    <string name="upload_screenshot_box_text_label">Upload Screenshot</string>
+
 </resources>

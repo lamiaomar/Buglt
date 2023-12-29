@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BugltTheme {
                 navController = rememberNavController()
-                SetUpNavGraph(navController = navController)
+                SetUpNavGraph(navController = navController, context = baseContext)
             }
         }
     }
