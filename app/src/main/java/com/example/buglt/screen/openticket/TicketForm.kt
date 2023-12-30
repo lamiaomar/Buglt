@@ -1,6 +1,11 @@
 package com.example.buglt.screen.openticket
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -27,20 +32,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.example.buglt.R
 import com.example.buglt.extension.dashedBorder
+import com.example.buglt.images.UploadScreenShotManager
 import com.example.buglt.ui.theme.Purple80
 
 @Composable
-fun TicketForm(context: Context) {
+fun TicketForm(context: Context, uploadScreenShotManager: UploadScreenShotManager) {
 
     var selectedOption by remember { mutableStateOf("Android") }
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
+    var isImageVisiable by remember { mutableStateOf(false) }
+    var bitmap: Bitmap? by remember { mutableStateOf(null) }
+
+    val lifecycleOwner = LocalLifecycleOwner.current
 
     Box(
         modifier = Modifier
@@ -64,7 +77,7 @@ fun TicketForm(context: Context) {
             OutlinedTextField(
                 value = title,
                 onValueChange = { title = it },
-                label = { Text(context.getString(R.string.summery_edit_text_label)) },
+                label = { Text(stringResource(R.string.summery_edit_text_label)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 16.dp),
@@ -82,24 +95,47 @@ fun TicketForm(context: Context) {
                     .padding(bottom = 16.dp)
                     .dashedBorder(1.dp, Color.Gray, 8.dp)
                     .height(60.dp)
-                    .clickable { /*TODO*/ },
+                    .clickable { uploadScreenShotManager.isPermissionRequested.postValue(true) },
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = context.getString(R.string.upload_screenshot_box_text_label),
+                    text = stringResource(R.string.upload_screenshot_box_text_label),
                     textAlign = TextAlign.Start,
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier
                         .align(Alignment.CenterStart)
                         .padding(start = 14.dp)
                 )
+
+                uploadScreenShotManager.imageURL?.observe(lifecycleOwner) {
+                    if (it != null) {
+                        isImageVisiable = true
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                            val imageUri: Uri = it
+                            val source = ImageDecoder.createSource(
+                                context.applicationContext.contentResolver, imageUri
+                            )
+                            bitmap = ImageDecoder.decodeBitmap(source)
+                            uploadScreenShotManager.imageURL?.postValue(null)
+                        }
+                    }
+                }
+                if (isImageVisiable) {
+                    Image(
+                        painter = rememberAsyncImagePainter(bitmap),
+                        contentDescription = stringResource(id = R.string.button_radio_ios),
+                        modifier = Modifier
+                            .padding(end = 10.dp)
+                            .align(Alignment.CenterEnd)
+                    )
+                }
             }
 
             // Description EditText
             OutlinedTextField(
                 value = description,
                 onValueChange = { description = it },
-                label = { Text(context.getString(R.string.description_edit_text_label)) },
+                label = { Text(stringResource(R.string.description_edit_text_label)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
@@ -116,16 +152,16 @@ fun TicketForm(context: Context) {
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
-                    text = context.resources.getString(R.string.button_radio_platform_title),
+                    text = stringResource(R.string.button_radio_platform_title),
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 16.dp, end = 11.dp, top = 7.dp),
                     textAlign = TextAlign.Center,
                 )
                 listOf(
-                    context.getString(R.string.button_radio_android),
-                    context.getString(R.string.button_radio_ios),
-                    context.getString(R.string.button_radio_pwa),
+                    stringResource(R.string.button_radio_android),
+                    stringResource(R.string.button_radio_ios),
+                    stringResource(R.string.button_radio_pwa),
                 ).forEach { option ->
                     Row(
                         verticalAlignment = Alignment.CenterVertically,

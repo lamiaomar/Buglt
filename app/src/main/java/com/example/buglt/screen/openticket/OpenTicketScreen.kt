@@ -1,6 +1,7 @@
 package com.example.buglt.screen.openticket
 
 import android.content.Context
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
@@ -10,9 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.buglt.R
+import com.example.buglt.TicketsViewModel
+import com.example.buglt.images.UploadScreenShotManager
 import com.example.buglt.navigation.Screens
 
+
 @OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalAnimationApi
 @Composable
 fun OpenTicketScreen(navController: NavHostController?, context: Context) {
 
@@ -29,7 +34,10 @@ fun OpenTicketScreen(navController: NavHostController?, context: Context) {
             .fillMaxWidth(),
         navigationIcon = {
             IconButton(
-                onClick = { navController?.navigate(Screens.Splash.route) }
+                onClick = {
+                    // TODO route to home screen
+                    navController?.navigate(Screens.Splash.route)
+                }
             ) {
                 Icon(
                     imageVector = Icons.Filled.Clear,
@@ -52,7 +60,7 @@ fun OpenTicketScreen(navController: NavHostController?, context: Context) {
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        TicketForm(context = context)
+        TicketForm(context = context, uploadScreenShotManager = uploadScreenShotManager)
 
         Button(
             onClick = { /*TODO*/ },
