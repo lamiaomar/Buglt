@@ -19,17 +19,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.buglt.dto.TicketDto
+import com.buglt.dto.Ticket
 
 @Composable
-fun TicketWidget(ticket: TicketDto) {
+fun TicketWidget(ticket: Ticket) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
             .clip(MaterialTheme.shapes.medium)
             .background(MaterialTheme.colorScheme.background)
-            .clickable {}
             .padding(16.dp)
     ) {
         Text(text = ticket.title, style = MaterialTheme.typography.titleMedium)

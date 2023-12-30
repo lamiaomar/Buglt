@@ -6,8 +6,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 private const val BASE_URL = "https://script.google.com/"
-const val ENDPOINT = "macros/s/AKfycbxcNz-wPv-A82j4ZXSk5w2zRCg6mV6BPN54dRQWOrfe3xrMB31ezdfopg39gk6xJ6UE/exec?"
+const val ENDPOINT = "macros/s/AKfycbxR2j2BcgfECeUqY2Cz9vV340-cGvWRZHewAAvxgIjIFWiXHxmWDquJaWId-MSdX67b/exec?"
+
 const val CREATE_ACTION = "create"
+const val CREATE_GET_TICKET = "getTickets"
+
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())

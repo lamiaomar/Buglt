@@ -9,7 +9,7 @@ import androidx.navigation.compose.composable
 import com.example.buglt.TicketsViewModel
 import com.example.buglt.screen.home.HomeScreen
 import com.example.buglt.screen.openticket.OpenTicketScreen
-import com.example.buglt.screen.SplashScreen
+import com.example.buglt.screen.splash.SplashScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 @ExperimentalAnimationApi

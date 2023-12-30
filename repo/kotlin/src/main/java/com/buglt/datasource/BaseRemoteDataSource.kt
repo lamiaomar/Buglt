@@ -2,6 +2,7 @@ package com.buglt.datasource
 
 import com.buglt.body.CreateTicketBody
 import com.buglt.dto.TicketDataDto
+import com.buglt.dto.TicketsDto
 import com.buglt.service.BugltApiService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -20,5 +21,10 @@ class BaseRemoteDataSource @Inject constructor(
                 imageURL = createTicketBody.imageURL,
                 platform = createTicketBody.platform
             )
+        }
+
+    suspend fun getTickets(): TicketsDto =
+        withContext(ioDispatcher) {
+            bugltApiService.getTickets()
         }
 }

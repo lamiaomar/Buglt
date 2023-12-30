@@ -5,7 +5,6 @@ import com.buglt.datasource.BaseRemoteDataSource
 import com.buglt.service.BugltApi
 import com.buglt.service.BugltApiService
 import com.buglt.domin.repository.AppRepositoryImpl
-import com.example.buglt.BugltApplication
 import com.example.buglt.images.UploadScreenShotManager
 import dagger.Module
 import dagger.Provides

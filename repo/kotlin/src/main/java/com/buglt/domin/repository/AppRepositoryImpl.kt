@@ -3,6 +3,7 @@ package com.buglt.domin.repository
 import com.buglt.body.CreateTicketBody
 import com.buglt.datasource.BaseRemoteDataSource
 import com.buglt.dto.TicketDataDto
+import com.buglt.dto.TicketsDto
 import javax.inject.Inject
 
 class AppRepositoryImpl @Inject constructor(
@@ -12,5 +13,9 @@ class AppRepositoryImpl @Inject constructor(
         return baseRemoteDataSource.createTicket(
             createTicketBody = createTicketBody
         )
+    }
+
+    suspend fun getTickets(): TicketsDto {
+        return baseRemoteDataSource.getTickets()
     }
 }
