@@ -40,18 +40,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.buglt.R
+import com.example.buglt.TicketsViewModel
 import com.example.buglt.extension.dashedBorder
-import com.example.buglt.images.UploadScreenShotManager
 import com.example.buglt.ui.theme.Purple80
 
 @Composable
-fun TicketForm(context: Context, uploadScreenShotManager: UploadScreenShotManager) {
+fun TicketForm(context: Context, viewModel: TicketsViewModel) {
 
-    var selectedOption by remember { mutableStateOf("Android") }
+    var selectedOption by remember { mutableStateOf("") }
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
-    var isImageVisiable by remember { mutableStateOf(false) }
     var bitmap: Bitmap? by remember { mutableStateOf(null) }
+
+    var isImageVisible by remember { mutableStateOf(false) }
 
     val lifecycleOwner = LocalLifecycleOwner.current
 
@@ -76,7 +77,16 @@ fun TicketForm(context: Context, uploadScreenShotManager: UploadScreenShotManage
             // Summery EditText
             OutlinedTextField(
                 value = title,
-                onValueChange = { title = it },
+                onValueChange = {
+                    title = it
+                    viewModel.setCreateTicketFormBody(
+                        title = title,
+                        description = description,
+                        platform = selectedOption,
+                        imageURL = bitmap
+                    )
+
+                },
                 label = { Text(stringResource(R.string.summery_edit_text_label)) },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -95,7 +105,11 @@ fun TicketForm(context: Context, uploadScreenShotManager: UploadScreenShotManage
                     .padding(bottom = 16.dp)
                     .dashedBorder(1.dp, Color.Gray, 8.dp)
                     .height(60.dp)
-                    .clickable { uploadScreenShotManager.isPermissionRequested.postValue(true) },
+                    .clickable {
+                        viewModel.uploadScreenShotManager.isPermissionRequested.postValue(
+                            true
+                        )
+                    },
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -107,20 +121,26 @@ fun TicketForm(context: Context, uploadScreenShotManager: UploadScreenShotManage
                         .padding(start = 14.dp)
                 )
 
-                uploadScreenShotManager.imageURL?.observe(lifecycleOwner) {
+                viewModel.uploadScreenShotManager.imageURL?.observe(lifecycleOwner) {
                     if (it != null) {
-                        isImageVisiable = true
+                        isImageVisible = true
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                             val imageUri: Uri = it
                             val source = ImageDecoder.createSource(
                                 context.applicationContext.contentResolver, imageUri
                             )
                             bitmap = ImageDecoder.decodeBitmap(source)
-                            uploadScreenShotManager.imageURL?.postValue(null)
+                            viewModel.uploadScreenShotManager.imageURL?.postValue(null)
                         }
                     }
                 }
-                if (isImageVisiable) {
+                if (isImageVisible) {
+                    viewModel.setCreateTicketFormBody(
+                        title = title,
+                        description = description,
+                        platform = selectedOption,
+                        imageURL = bitmap
+                    )
                     Image(
                         painter = rememberAsyncImagePainter(bitmap),
                         contentDescription = stringResource(id = R.string.button_radio_ios),
@@ -134,7 +154,15 @@ fun TicketForm(context: Context, uploadScreenShotManager: UploadScreenShotManage
             // Description EditText
             OutlinedTextField(
                 value = description,
-                onValueChange = { description = it },
+                onValueChange = {
+                    description = it
+                    viewModel.setCreateTicketFormBody(
+                        title = title,
+                        description = description,
+                        platform = selectedOption,
+                        imageURL = bitmap
+                    )
+                },
                 label = { Text(stringResource(R.string.description_edit_text_label)) },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -155,7 +183,7 @@ fun TicketForm(context: Context, uploadScreenShotManager: UploadScreenShotManage
                     text = stringResource(R.string.button_radio_platform_title),
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(bottom = 16.dp, end = 11.dp, top = 7.dp),
+                    modifier = Modifier.padding(bottom = 16.dp, end = 9.dp, top = 7.dp),
                     textAlign = TextAlign.Center,
                 )
                 listOf(
@@ -169,7 +197,15 @@ fun TicketForm(context: Context, uploadScreenShotManager: UploadScreenShotManage
                     ) {
                         RadioButton(
                             selected = option == selectedOption,
-                            onClick = { selectedOption = option },
+                            onClick = {
+                                selectedOption = option
+                                viewModel.setCreateTicketFormBody(
+                                    title = title,
+                                    description = description,
+                                    platform = selectedOption,
+                                    imageURL = bitmap
+                                )
+                            },
                             colors = RadioButtonDefaults.colors(
                                 selectedColor = Purple80,
                                 unselectedColor = Color.Gray

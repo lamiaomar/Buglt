@@ -1,6 +1,7 @@
 package com.example.buglt.screen.openticket
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -12,14 +13,17 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.buglt.R
 import com.example.buglt.TicketsViewModel
-import com.example.buglt.images.UploadScreenShotManager
 import com.example.buglt.navigation.Screens
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalAnimationApi
 @Composable
-fun OpenTicketScreen(navController: NavHostController?, context: Context) {
+fun OpenTicketScreen(
+    navController: NavHostController?,
+    context: Context,
+    viewModel: TicketsViewModel
+) {
 
     CenterAlignedTopAppBar(
         title = {
@@ -60,10 +64,19 @@ fun OpenTicketScreen(navController: NavHostController?, context: Context) {
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        TicketForm(context = context, uploadScreenShotManager = uploadScreenShotManager)
+        TicketForm(context = context, viewModel = viewModel)
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                if (!viewModel.createTicketBody?.title.isNullOrBlank() &&
+                    !viewModel.createTicketBody?.description.isNullOrBlank() &&
+                    !viewModel.createTicketBody?.platform.isNullOrBlank()
+                ) {
+                    viewModel.createTicket()
+                } else {
+                    showMessage(context = context, message = context.getString(R.string.fill_all_required_data))
+                }
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 40.dp, start = 8.dp, end = 8.dp)
@@ -72,4 +85,7 @@ fun OpenTicketScreen(navController: NavHostController?, context: Context) {
             Text(context.getString(R.string.create_ticket_button))
         }
     }
+}
+fun showMessage(context: Context, message:String){
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
