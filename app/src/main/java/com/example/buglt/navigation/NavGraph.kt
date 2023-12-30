@@ -20,10 +20,9 @@ fun SetUpNavGraph(
     context: Context,
     viewModel: TicketsViewModel
 ) {
-
     NavHost(
         navController = navController,
-        startDestination = Screens.Home.route
+        startDestination = Screens.Splash.route
     ) {
 
         composable(route = Screens.Splash.route) {
