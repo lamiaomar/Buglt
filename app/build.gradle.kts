@@ -53,6 +53,7 @@ dependencies {
     var lifecycle_version = "2.6.2"
     var arch_version = "2.2.0"
 
+    implementation(project(":repo:kotlin"))
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.activity:activity-compose:1.7.0")
@@ -148,7 +149,6 @@ dependencies {
 
     // optional - Test helpers for Lifecycle runtime
     testImplementation("androidx.lifecycle:lifecycle-runtime-testing:$lifecycle_version")
-
 
     // Horizontal Pager and Indicators - Accompanist
     implementation("com.google.accompanist:accompanist-pager:0.21.2-beta")

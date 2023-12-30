@@ -15,7 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Buglt"
 include(":app")
-
-include(":java")
-include(":src")
-include(":src:gradle")
+include(":repo:kotlin")
