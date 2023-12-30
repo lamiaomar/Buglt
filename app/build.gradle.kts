@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+//    id("com.android.library")
+//    `kotlin-dsl`
 }
 
 android {
@@ -42,11 +44,6 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
@@ -54,9 +51,10 @@ dependencies {
     var arch_version = "2.2.0"
 
     implementation(project(":repo:kotlin"))
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.activity:activity-compose:1.7.0")
+
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.activity:activity-compose:1.8.2")
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
@@ -70,13 +68,10 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    // Compose Navigation
-    implementation("androidx.navigation:navigation-compose:2.4.0-beta02")
-
     // Room components
-    implementation("androidx.room:room-runtime:2.3.0")
-    annotationProcessor("androidx.room:room-compiler:2.3.0")
-    implementation("androidx.room:room-ktx:2.3.0")
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
 
     // KotlinX Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
@@ -111,10 +106,10 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1")
 
     // Dagger - Hilt
-    implementation("com.google.dagger:hilt-android:2.38.1")
-    annotationProcessor("com.google.dagger:hilt-android-compiler:2.38.1")
-    annotationProcessor("androidx.hilt:hilt-compiler:1.0.0")
-    annotationProcessor("androidx.hilt:hilt-navigation-compose:1.0.0-alpha03")
+    implementation("com.google.dagger:hilt-android:2.50")
+    annotationProcessor("com.google.dagger:hilt-android-compiler:2.43.2")
+    annotationProcessor("androidx.hilt:hilt-compiler:1.1.0")
+    annotationProcessor("androidx.hilt:hilt-navigation-compose:1.1.0")
 
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
@@ -153,4 +148,49 @@ dependencies {
     // Horizontal Pager and Indicators - Accompanist
     implementation("com.google.accompanist:accompanist-pager:0.21.2-beta")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.21.2-beta")
+
+    // TODO Handle all the gradle config like below
+    implementation(Lifecycle.runtime)
+    implementation(Lifecycle.java8)
+    annotationProcessor(Lifecycle.compiler)
+    implementation(Lifecycle.viewmodel)
+    implementation(Lifecycle.livedata)
+    implementation(Lifecycle.process)
+    implementation(Lifecycle.service)
+    implementation(Navigation.fragment)
+    implementation(Navigation.ui)
+    implementation(Navigation.runtime)
+
+
+    // Compose dependencies
+    implementation("androidx.navigation:navigation-compose:2.7.6")
+    implementation("androidx.compose.material:material-icons-extended:1.5.4")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+}
+
+object Version {
+    const val lifecycle = "2.6.0-alpha01"
+    const val navigation = "2.5.3"
+}
+
+object Lifecycle {
+    const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Version.lifecycle}"
+    const val java8 = "androidx.lifecycle:lifecycle-common-java8:${Version.lifecycle}"
+    const val compiler = "androidx.lifecycle:lifecycle-compiler:${Version.lifecycle}"
+    const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.lifecycle}"
+    const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Version.lifecycle}"
+    const val process = "androidx.lifecycle:lifecycle-process:${Version.lifecycle}"
+    const val service = "androidx.lifecycle:lifecycle-service:${Version.lifecycle}"
+}
+
+object Navigation {
+    const val safeArgsPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Version.navigation}"
+    const val fragment = "androidx.navigation:navigation-fragment-ktx:${Version.navigation}"
+    const val ui = "androidx.navigation:navigation-ui-ktx:${Version.navigation}"
+    const val runtime = "androidx.navigation:navigation-runtime-ktx:${Version.navigation}"
 }
