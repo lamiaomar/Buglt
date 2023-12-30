@@ -7,7 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.buglt.TicketsViewModel
-import com.example.buglt.screen.HomeScreen
+import com.example.buglt.screen.home.HomeScreen
 import com.example.buglt.screen.openticket.OpenTicketScreen
 import com.example.buglt.screen.SplashScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -23,7 +23,7 @@ fun SetUpNavGraph(
 
     NavHost(
         navController = navController,
-        startDestination = Screens.OpenTicket.route
+        startDestination = Screens.Home.route
     ) {
 
         composable(route = Screens.Splash.route) {
@@ -37,7 +37,11 @@ fun SetUpNavGraph(
             )
         }
         composable(route = Screens.Home.route) {
-            HomeScreen(navController = navController)
+            HomeScreen(
+                navController = navController,
+                context = context,
+                viewModel = viewModel
+            )
         }
     }
 }

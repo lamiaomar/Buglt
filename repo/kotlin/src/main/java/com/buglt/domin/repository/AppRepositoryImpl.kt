@@ -1,8 +1,8 @@
-package com.buglt.repo.domin.repository
+package com.buglt.domin.repository
 
-import com.buglt.repo.body.CreateTicketBody
-import com.buglt.repo.datasource.BaseRemoteDataSource
-import com.buglt.repo.dto.TicketDataDto
+import com.buglt.body.CreateTicketBody
+import com.buglt.datasource.BaseRemoteDataSource
+import com.buglt.dto.TicketDataDto
 import javax.inject.Inject
 
 class AppRepositoryImpl @Inject constructor(

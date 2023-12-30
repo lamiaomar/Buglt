@@ -1,6 +1,6 @@
-package com.buglt.repo.service
+package com.buglt.service
 
-import com.buglt.repo.dto.TicketDataDto
+import com.buglt.dto.TicketDataDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 

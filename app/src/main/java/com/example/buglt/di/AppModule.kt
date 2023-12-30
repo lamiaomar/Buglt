@@ -1,10 +1,10 @@
 package com.example.buglt.di
 
 import android.content.Context
-import com.buglt.repo.datasource.BaseRemoteDataSource
-import com.buglt.repo.service.BugltApi
-import com.buglt.repo.service.BugltApiService
-import com.buglt.repo.domin.repository.AppRepositoryImpl
+import com.buglt.datasource.BaseRemoteDataSource
+import com.buglt.service.BugltApi
+import com.buglt.service.BugltApiService
+import com.buglt.domin.repository.AppRepositoryImpl
 import com.example.buglt.BugltApplication
 import com.example.buglt.images.UploadScreenShotManager
 import dagger.Module

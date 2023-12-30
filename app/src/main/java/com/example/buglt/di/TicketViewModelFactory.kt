@@ -2,7 +2,7 @@ package com.example.buglt.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.buglt.repo.domin.repository.AppRepositoryImpl
+import com.buglt.domin.repository.AppRepositoryImpl
 import com.example.buglt.TicketsViewModel
 
 @Suppress("UNCHECKED_CAST")

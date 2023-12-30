@@ -47,6 +47,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     // Retrofit with Moshi Converter
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
 
     // Dagger - Hilt
     implementation("com.google.dagger:hilt-android:2.50")
