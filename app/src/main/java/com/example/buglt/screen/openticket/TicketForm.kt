@@ -61,6 +61,7 @@ fun TicketForm(context: Context, viewModel: TicketsViewModel) {
             .fillMaxWidth()
             .height(449.dp)
             .clipToBounds()
+            .padding(start = 10.dp, end = 10.dp)
             .border(
                 width = 1.dp,
                 color = Purple80,
@@ -183,7 +184,7 @@ fun TicketForm(context: Context, viewModel: TicketsViewModel) {
                     text = stringResource(R.string.button_radio_platform_title),
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(bottom = 16.dp, end = 9.dp, top = 7.dp),
+                    modifier = Modifier.padding(bottom = 16.dp, end = 5.dp, top = 7.dp),
                     textAlign = TextAlign.Center,
                 )
                 listOf(
@@ -193,7 +194,7 @@ fun TicketForm(context: Context, viewModel: TicketsViewModel) {
                 ).forEach { option ->
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(2.dp)
+                        horizontalArrangement = Arrangement.spacedBy(1.dp)
                     ) {
                         RadioButton(
                             selected = option == selectedOption,

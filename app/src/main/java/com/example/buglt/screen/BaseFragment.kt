@@ -56,6 +56,26 @@ class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeRequestPermission()
+        observeResponseStatus()
+    }
+
+
+    private fun observeResponseStatus() {
+        viewModel.createTicketStatus.observe(viewLifecycleOwner) {
+            when (it) {
+                ResponseStatus.DONE -> {
+                    navController.navigate(Screens.Home.route)
+                }
+
+                ResponseStatus.ERROR -> {
+                    // TODO Show error view
+                }
+
+                ResponseStatus.LOADING -> {
+                    // TODO Show loading view
+                }
+            }
+        }
     }
 
     private fun observeRequestPermission() {
