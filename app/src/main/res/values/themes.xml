@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Buglt" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.Buglt" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <style name="Theme.Shop.MySplash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+    </style>
 </resources>

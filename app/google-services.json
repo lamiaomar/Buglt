@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "483216107261",
+    "project_id": "buglt-409704",
+    "storage_bucket": "buglt-409704.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483216107261:android:3d5a968419aead76f40094",
+        "android_client_info": {
+          "package_name": "com.example.buglt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxpbr15LnhwXZK-OYzT-1sAaet2KBpFCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,7 +2,28 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="EditTextWithCutBorderPreview">
+        <State />
+      </entry>
+      <entry key="GreetingPreview">
+        <State />
+      </entry>
+      <entry key="OpenTicketScreenPreview">
+        <State />
+      </entry>
+      <entry key="SplashScreenPreview">
+        <State />
+      </entry>
       <entry key="app">
+        <State />
+      </entry>
+      <entry key="app.repo">
+        <State />
+      </entry>
+      <entry key="java">
+        <State />
+      </entry>
+      <entry key="src.gradle">
         <State />
       </entry>
     </value>
