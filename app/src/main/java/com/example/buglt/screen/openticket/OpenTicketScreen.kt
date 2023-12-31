@@ -14,7 +14,9 @@ import androidx.navigation.NavHostController
 import com.example.buglt.R
 import com.example.buglt.TicketsViewModel
 
-
+/**
+ * Composable function representing the Open Ticket screen.
+ */
 @ExperimentalAnimationApi
 @Composable
 fun OpenTicketScreen(
@@ -23,6 +25,7 @@ fun OpenTicketScreen(
     viewModel: TicketsViewModel
 ) {
 
+    // Display the toolbar at the top of the screen
     OpenTicketToolbar(navController)
 
     Column(
@@ -32,22 +35,27 @@ fun OpenTicketScreen(
             .background(Color.White)
     ) {
 
+        // Display the title of the open ticket form
         Text(
             text = context.getString(R.string.open_ticket_form_title),
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(bottom = 16.dp, start = 10.dp, end = 10.dp)
         )
 
+        // Display the open ticket form
         TicketForm(context = context, viewModel = viewModel)
 
+        // Display the "Create Ticket" button
         Button(
             onClick = {
+                // Check if required data is filled before creating a ticket
                 if (!viewModel.createTicketBody?.title.isNullOrBlank() &&
                     !viewModel.createTicketBody?.description.isNullOrBlank() &&
                     !viewModel.createTicketBody?.platform.isNullOrBlank()
                 ) {
                     viewModel.createTicket()
                 } else {
+                    // Show a message if required data is not filled
                     showMessage(
                         context = context,
                         message = context.getString(R.string.fill_all_required_data)
@@ -64,6 +72,9 @@ fun OpenTicketScreen(
     }
 }
 
+/**
+ * Function to display a toast message. When mandatory fields are empty.
+ */
 fun showMessage(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }

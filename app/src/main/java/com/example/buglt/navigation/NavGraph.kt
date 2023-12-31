@@ -12,6 +12,13 @@ import com.example.buglt.screen.openticket.OpenTicketScreen
 import com.example.buglt.screen.splash.SplashScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 
+/**
+ * Composable function responsible for setting up the navigation graph using Jetpack Compose.
+ *
+ * @param navController Navigation controller for handling navigation actions.
+ * @param context Application context.
+ * @param viewModel ViewModel responsible for managing tickets related operations.
+ */
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @Composable
@@ -20,14 +27,18 @@ fun SetUpNavGraph(
     context: Context,
     viewModel: TicketsViewModel
 ) {
+    // Define the navigation host with a start destination
     NavHost(
         navController = navController,
         startDestination = Screens.Home.route
     ) {
 
+        // Define a composable for the SplashScreen
         composable(route = Screens.Splash.route) {
             SplashScreen(navController = navController)
         }
+
+        // Define a composable for the OpenTicketScreen
         composable(route = Screens.OpenTicket.route) {
             OpenTicketScreen(
                 navController = navController,
@@ -35,11 +46,12 @@ fun SetUpNavGraph(
                 viewModel = viewModel
             )
         }
+
+        // Define a composable for the HomeScreen
         composable(route = Screens.Home.route) {
             HomeScreen(
                 navController = navController,
-                viewModel = viewModel,
-                context = context
+                viewModel = viewModel
             )
         }
     }

@@ -21,11 +21,15 @@ import androidx.navigation.NavHostController
 import com.example.buglt.R
 import com.example.buglt.navigation.Screens
 
+/**
+ * Composable function representing the top app bar of the Open Ticket screen.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OpenTicketToolbar(navController: NavHostController?) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
+    // Display the scaffold with a top app bar
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -34,6 +38,7 @@ fun OpenTicketToolbar(navController: NavHostController?) {
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
+                // Set the title of the top app bar
                 title = {
                     Text(
                         stringResource(id = R.string.create_ticket_screen_title),
@@ -41,12 +46,11 @@ fun OpenTicketToolbar(navController: NavHostController?) {
                         overflow = TextOverflow.Ellipsis
                     )
                 },
+                // Add a navigation icon to go back to the Home screen
                 navigationIcon = {
                     IconButton(onClick = {
-
-                        navController?.navigate(Screens.Home.route)  })
-
-                    {
+                        navController?.navigate(Screens.Home.route)
+                    }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Navigate back"

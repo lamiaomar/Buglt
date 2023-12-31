@@ -44,18 +44,22 @@ import com.example.buglt.TicketsViewModel
 import com.example.buglt.extension.dashedBorder
 import com.example.buglt.ui.theme.Purple80
 
+/**
+ * Composable function representing the ticket creation form.
+ */
 @Composable
 fun TicketForm(context: Context, viewModel: TicketsViewModel) {
 
+    // Local state variables to manage form input values
     var selectedOption by remember { mutableStateOf("") }
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var bitmap: Bitmap? by remember { mutableStateOf(null) }
 
     var isImageVisible by remember { mutableStateOf(false) }
-
     val lifecycleOwner = LocalLifecycleOwner.current
 
+    // Container box for the entire ticket creation form
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -75,7 +79,7 @@ fun TicketForm(context: Context, viewModel: TicketsViewModel) {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            // Summery EditText
+            // Summary EditText
             OutlinedTextField(
                 value = title,
                 onValueChange = {
@@ -113,6 +117,7 @@ fun TicketForm(context: Context, viewModel: TicketsViewModel) {
                     },
                 contentAlignment = Alignment.Center
             ) {
+                // Text indicating the purpose of the box
                 Text(
                     text = stringResource(R.string.upload_screenshot_box_text_label),
                     textAlign = TextAlign.Start,
@@ -122,6 +127,7 @@ fun TicketForm(context: Context, viewModel: TicketsViewModel) {
                         .padding(start = 14.dp)
                 )
 
+                // Observe changes in the image URL and update the bitmap
                 viewModel.uploadScreenShotManager.imageURL?.observe(lifecycleOwner) {
                     if (it != null) {
                         isImageVisible = true
@@ -135,6 +141,8 @@ fun TicketForm(context: Context, viewModel: TicketsViewModel) {
                         }
                     }
                 }
+
+                // Display the uploaded image if visible
                 if (isImageVisible) {
                     viewModel.setCreateTicketFormBody(
                         title = title,
@@ -180,6 +188,7 @@ fun TicketForm(context: Context, viewModel: TicketsViewModel) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
+                // Label for the radio buttons
                 Text(
                     text = stringResource(R.string.button_radio_platform_title),
                     style = MaterialTheme.typography.bodyMedium,
@@ -187,6 +196,8 @@ fun TicketForm(context: Context, viewModel: TicketsViewModel) {
                     modifier = Modifier.padding(bottom = 16.dp, end = 5.dp, top = 7.dp),
                     textAlign = TextAlign.Center,
                 )
+
+                // Create radio buttons for each platform option
                 listOf(
                     stringResource(R.string.button_radio_android),
                     stringResource(R.string.button_radio_ios),

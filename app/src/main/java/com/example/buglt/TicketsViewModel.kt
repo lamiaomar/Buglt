@@ -18,9 +18,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * ViewModel for managing tickets related operations.
+ *
+ * @param appRepositoryImpl Repository for interacting with the data layer.
+ */
 @HiltViewModel
 class TicketsViewModel(
-     val appRepositoryImpl: AppRepositoryImpl
+    val appRepositoryImpl: AppRepositoryImpl
 ) : ViewModel() {
 
     val uploadScreenShotManager = UploadScreenShotManager()
@@ -34,6 +39,9 @@ class TicketsViewModel(
     private val _ticketsList = MutableLiveData<List<Ticket>>()
     val ticketsList: LiveData<List<Ticket>> = _ticketsList
 
+    /**
+     * Function to create a new ticket.
+     */
     fun createTicket() = viewModelScope.launch {
         try {
             if (createTicketBody != null) {
@@ -48,7 +56,10 @@ class TicketsViewModel(
         }
     }
 
-     fun addTicketToSheet() = viewModelScope.launch {
+    /**
+     * Function to add a ticket to the sheet.
+     */
+    fun addTicketToSheet() = viewModelScope.launch {
         try {
             withContext(Dispatchers.IO) {
                 if (createTicketBody != null) {
@@ -61,6 +72,11 @@ class TicketsViewModel(
         }
     }
 
+    /**
+     * Function to update the image storage URL in the ticket body.
+     *
+     * @param imageURL URL of the added image.
+     */
     fun updateImageStorageURL(imageURL: String) {
         createTicketBody = createTicketBody?.copy(imageURL = imageURL)
     }
@@ -72,11 +88,16 @@ class TicketsViewModel(
         db.collection("posts")
             .add(data)
             .addOnSuccessListener { documentReference ->
+                // Handle success
             }
             .addOnFailureListener { e ->
+                // Handle failure
             }
     }
 
+    /**
+     * Function to get the list of tickets.
+     */
     fun getTickets() = viewModelScope.launch {
         try {
             val tickets = appRepositoryImpl.getTickets()
@@ -86,6 +107,9 @@ class TicketsViewModel(
         }
     }
 
+    /**
+     * Function to set the body of the create ticket form.
+     */
     fun setCreateTicketFormBody(
         title: String,
         description: String,
