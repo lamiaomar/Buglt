@@ -7,6 +7,9 @@ import com.buglt.service.BugltApiService
 import com.buglt.domin.repository.AppRepositoryImpl
 import com.example.buglt.BugltApplication
 import com.example.buglt.images.UploadScreenShotManager
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,7 +38,12 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideAppRepository(): AppRepositoryImpl = AppRepositoryImpl(provideRemoteDataSource())
+    private fun provideFirebaseInstance(): FirebaseFirestore = Firebase.firestore
+
+    @Provides
+    @Singleton
+    fun provideAppRepository(): AppRepositoryImpl =
+        AppRepositoryImpl(provideRemoteDataSource(), provideFirebaseInstance())
 
     @Provides
     @Singleton

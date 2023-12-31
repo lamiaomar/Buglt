@@ -76,6 +76,14 @@ class BaseFragment : Fragment() {
                 }
             }
         }
+
+        viewModel.appRepositoryImpl.generatedFilePath.observe(viewLifecycleOwner) {
+
+            if (it.isNotEmpty()) {
+                viewModel.updateImageStorageURL(it)
+                viewModel.addTicketToSheet()
+            }
+        }
     }
 
     private fun observeRequestPermission() {
@@ -99,6 +107,7 @@ class BaseFragment : Fragment() {
             if (it.resultCode == Activity.RESULT_OK) {
                 val data = it.data
                 val imgUri = data?.data
+                viewModel.imageURI = imgUri
                 viewModel.uploadScreenShotManager.imageURL?.postValue(imgUri)
             }
         }

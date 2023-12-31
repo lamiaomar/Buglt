@@ -38,7 +38,8 @@ fun SetUpNavGraph(
         composable(route = Screens.Home.route) {
             HomeScreen(
                 navController = navController,
-                viewModel = viewModel
+                viewModel = viewModel,
+                context = context
             )
         }
     }
