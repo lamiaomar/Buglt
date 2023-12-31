@@ -8,7 +8,9 @@ data class Ticket(
     @Json(name = "description")
     val description: String,
     @Json(name = "platform")
-    val platformLabel: String
+    val platformLabel: String,
+    @Json(name = "image_url")
+    val imageURL: String = "",
 ) : Serializable
 
 data class TicketsDto(

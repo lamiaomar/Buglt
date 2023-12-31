@@ -35,7 +35,8 @@ fun HomeScreen(
                                 Ticket(
                                     title = it.title,
                                     description = it.description,
-                                    platformLabel = it.platformLabel
+                                    platformLabel = it.platformLabel,
+                                    imageURL = it.imageURL
                                 )
                             )
                         }
