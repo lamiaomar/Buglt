@@ -6,8 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 private const val BASE_URL = "https://script.google.com/"
-const val ENDPOINT = "macros/s/AKfycbxJARPNe2ycoUtqKqDKitQ7zDjalFff60S-MYmlHIhsA92DEeWtwftJ1y_-guAHqhRl/exec?"
-
+const val ENDPOINT = "macros/s/AKfycbxQ1G0xGy2KBb3XYc5zDtr1rp2rGqVKI1C_XuXTx4vwWHd5eMNkjjqNQ7YbP4KjMCC3/exec?"
 // Actions for the BugltApi
 const val CREATE_ACTION = "create"
 const val CREATE_GET_TICKET = "getTickets"
